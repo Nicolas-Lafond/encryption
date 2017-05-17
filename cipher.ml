@@ -40,7 +40,17 @@ let right_shift number character =
     match letter with 
         | Not_A_Letter -> character
         | _ -> letter_to_char (_right_shift letter number)
-    
 
+let _simple_substitution k c =
+    let letter = char_to_letter c in
+    match letter with
+        | Upper_Case o -> k.[o]
+        | Lower_Case o -> k.[o]
+        | _ -> c
+    
+(* Encryption functions starts here *)
 let cesar_cipher message shift_val = 
     String.map (right_shift shift_val) message
+
+let simple_substitution message key =
+    String.map (_simple_substitution key) message
