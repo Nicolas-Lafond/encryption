@@ -16,22 +16,22 @@ let char_to_letter c =
 let letter_to_char l = match l with
     | Upper_Case o -> char_of_int (o + int_of_char 'A')
     | Lower_Case o -> char_of_int (o + int_of_char 'a')
-    | Not_A_Letter -> ""
+    | Not_A_Letter -> ' '
 
 let string_to_list str = 
-    let aux s l i len = 
+    let rec aux s l i len = 
         if i < len 
-        then aux s (l @ s.[i]) (i + 1) len
+        then aux s (l @ [s.[i]]) (i + 1) len
         else l
     in aux str [] 0 (String.length str)
 
 let _right_shift letter number = match letter with
     | Upper_Case o 
-        -> if o > 25 then Upper_Case (o - 26)
-                     else Upper_Case o
+        -> if o + number > 25 then Upper_Case (o + number - 26)
+                     else Upper_Case (o + number)
     | Lower_Case o
-        -> if o > 25 then Lower_Case (o - 26)
-                     else Lower_Case o
+        -> if o + number > 25 then Lower_Case (o + number - 26)
+                     else Lower_Case (o + number)
     | Not_A_Letter -> Not_A_Letter
 
 let right_shift number character = 
